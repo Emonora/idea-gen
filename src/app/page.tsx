@@ -1,37 +1,75 @@
-import Link from "next/link";
+'use client';
+
+import { useState } from "react";
+import { list } from "../utils/list";
 
 export default function HomePage() {
+  const items: string[][] = list;
+
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [randomItem, setRandomItem] = useState<string | undefined>(undefined);
+
+  const getRandomInt = (min: number, max: number): number => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const handleClick = () => {
+    if (selectedCategory === null) {
+      alert("Please select a category!");
+      return;
+    }
+
+    const listChoice: string[] | undefined = items[selectedCategory];
+    if (!listChoice || listChoice.length === 0) {
+      alert("No items available in this category.");
+      return;
+    }
+
+    const randomIndex: number = getRandomInt(0, listChoice.length - 1);
+    setRandomItem(listChoice[randomIndex]);
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+    <main className="items-center justify-center flex flex-col bg-black text-white h-screen w-screen">
+      <div className="text-lg mb-4">Coding Project Idea Generator</div>
+      <div className="mb-4">Select a category:</div>
+
+      <label className="mr-4">
+        <input
+          type="radio"
+          name="category"
+          value="1"
+          checked={selectedCategory === 0}
+          onChange={() => setSelectedCategory(0)}
+        />
+        Game
+      </label>
+
+      <label className="mr-4">
+        <input
+          type="radio"
+          name="category"
+          value="2"
+          checked={selectedCategory === 1}
+          onChange={() => setSelectedCategory(1)}
+        />
+        App
+      </label>
+
+      <button
+        onClick={handleClick}
+        className="mt-8 rounded-full bg-orange-500 active:bg-orange-950 px-8 py-2"
+      >
+        Generate
+      </button>
+
+      {randomItem && (
+        <div className="mt-8 text-xl">
+          <div className="text-center">Your Random Idea:</div>
+          <div className="text-center mt-4 p-4 border border-white rounded">{randomItem}</div>
         </div>
-      </div>
+      )}
     </main>
   );
 }
+
