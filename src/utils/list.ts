@@ -129,8 +129,8 @@ export function Idea(type: number = 0) {
     if (licst === undefined) {
         licst = list[1];
     }
-    const licstItm = licst[Math.floor(Math.random()*46)];
-    const frameSelect = frames[Math.floor(Math.random()*8)];
+    const licstItm = licst[Math.floor(Math.random()*licst.length)];
+    const frameSelect = frames[Math.floor(Math.random()*frames.length)];
     
     const returnedItm = `${licstItm} in ${frameSelect}`;
 
