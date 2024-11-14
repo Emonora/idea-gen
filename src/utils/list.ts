@@ -8,7 +8,7 @@ const frames = [
   "C#",
   "Rust",
 ];
-export const list = [
+export const list: [string[], string[]] = [
   [
     "make a cookie clicker clone",
     "make a idle game",
@@ -55,16 +55,6 @@ export const list = [
     "make a puzzle game",
     "make a brain game",
     "make a game to kill time",
-    "build a game in next.js",
-    "build a game in svelte",
-    "build a game in react",
-    "build a game in angular",
-    "build a game in vanilla js, html, and css",
-    "build a game with tailwind",
-    "build a game with C",
-    "build a game with C++",
-    "build a game with rust",
-    "build a game with C#",
     "build a clone of a game you play",
   ],
   [
@@ -127,16 +117,22 @@ export const list = [
     "build a payroll app",
     "build a HR analytics app",
     "build an app to fix a problem you have",
-    "build an app in next.js",
-    "build an app in svelte",
-    "build an app in react",
-    "build an app in angular",
-    "build an app in vanilla js, html, and css",
-    "build an app with tailwind",
-    "build an app with C",
-    "build an app with C++",
-    "build an app with rust",
-    "build an app with C#",
     "build a clone of an app you use",
   ],
 ];
+
+export function Idea(type: number = 0) {
+    if (type > 1) {
+        type = 1;
+    }
+    let licst = list[type];
+    if (licst === undefined) {
+        licst = list[1];
+    }
+    const licstItm = licst[Math.floor(Math.random()*46)];
+    const frameSelect = frames[Math.floor(Math.random()*8)];
+    
+    const returnedItm = `${licstItm} in ${frameSelect}`;
+
+    return returnedItm;
+}
