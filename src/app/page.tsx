@@ -1,17 +1,12 @@
 'use client';
 
 import { useState } from "react";
-import { list } from "../utils/list";
+import { Idea } from "../utils/list";
 
 export default function HomePage() {
-  const items: string[][] = list;
 
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [randomItem, setRandomItem] = useState<string | undefined>(undefined);
-
-  const getRandomInt = (min: number, max: number): number => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
 
   const handleClick = () => {
     if (selectedCategory === null) {
@@ -19,14 +14,8 @@ export default function HomePage() {
       return;
     }
 
-    const listChoice: string[] | undefined = items[selectedCategory];
-    if (!listChoice || listChoice.length === 0) {
-      alert("No items available in this category.");
-      return;
-    }
 
-    const randomIndex: number = getRandomInt(0, listChoice.length - 1);
-    setRandomItem(listChoice[randomIndex]);
+    setRandomItem(Idea(selectedCategory));
   };
 
   return (
