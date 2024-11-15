@@ -140,3 +140,17 @@ export const list = [
     "build a clone of an app you use",
   ],
 ];
+
+export function Idea(type = 0) {
+    if (type > 1) {
+        type = 1;
+    }
+    let licst = list[type];
+    if (licst === undefined) {
+      licst = list[1];
+    }
+    const licstItm = licst[Math.floor(Math.random()*licst.length)];
+    const frameSelect = frames[Math.floor(Math.random()*frames.length)];
+
+    return `${licstItm} in ${frameSelect}`;
+}
