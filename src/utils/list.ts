@@ -55,7 +55,6 @@ export const list: [string[], string[]] = [
     "make a party game",
     "make a mobile game",
     "make a desktop game",
-    "make a browser game",
     "make a web game",
     "make a shooter game",
     "make a racing game",
@@ -78,6 +77,7 @@ export const list: [string[], string[]] = [
     "make a brain game",
     "make a game to kill time",
     "build a clone of a game you play",
+    "Make a game in the form of a chrome extension or addon",
   ],
   [
     "build a image processing app",
@@ -144,15 +144,15 @@ export const list: [string[], string[]] = [
 ];
 
 export function Idea(type = 0) {
-    if (type > 1) {
-        type = 1;
-    }
-    let licst = list[type];
-    if (licst === undefined) {
-      licst = list[1];
-    }
-    const licstItm = licst[Math.floor(Math.random()*licst.length)];
-    const frameSelect = frames[Math.floor(Math.random()*frames.length)];
+  if (type > 1) {
+    type = 1;
+  }
+  let licst = list[type];
+  if (licst === undefined) {
+    licst = list[1];
+  }
+  const licstItm = licst[Math.floor(Math.random() * licst.length)];
+  const frameSelect = frames[Math.floor(Math.random() * frames.length)];
 
-    return `${licstItm} in ${frameSelect}`;
+  return `${licstItm} in ${frameSelect}`;
 }
